@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  app:
+    image: bank-simulator
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/bank-simulator
+      - SPRING_DATASOURCE_USERNAME=dbuser
+      - SPRING_DATASOURCE_PASSWORD=postgres
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: bank-simulator
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
